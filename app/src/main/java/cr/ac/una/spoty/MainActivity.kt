@@ -86,12 +86,20 @@ class MainActivity : AppCompatActivity() {
                                     val trackResponse = response.body()
 
                                     if (trackResponse != null && trackResponse.tracks.items.isNotEmpty()) {
+
+                                        var count = 0 // Variable de conteo para limitar la cantidad de canciones a mostrar
+
                                         for (track in trackResponse.tracks.items) {
                                             val trackName = track.name
                                             val artistName = track.album.name
                                             val trackUri = track.uri
 
                                             displayTrackInfo(trackName, artistName, track.album.images[0].url)
+                                            count++ // Incrementar el conteo
+
+                                            if (count >= 50) {
+                                                break // Detener el bucle después de 50 canciones
+                                            }
                                         }
                                     } else {
                                         displayErrorMessage("No se encontraron canciones.")
