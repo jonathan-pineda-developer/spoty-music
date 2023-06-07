@@ -8,8 +8,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.room.Room
+import cr.ac.una.spoty.dao.SearchQueryDao
+import cr.ac.una.spoty.db.AppDatabase
 import cr.ac.una.spoty.entity.*
 import cr.ac.una.spoty.service.SpotifyService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +29,11 @@ class MainActivity : AppCompatActivity() {
     private val trackList: MutableList<Track> = mutableListOf()
     private var listViewItems: ListView? = null
     private lateinit var trackAdapter: TrackAdapter
+
+
+    //guardar en la base de datos local
+    private lateinit var searchQueryDao: SearchQueryDao
+    private lateinit var db: AppDatabase
 
 
 
@@ -54,6 +65,13 @@ class MainActivity : AppCompatActivity() {
         }
         trackAdapter = TrackAdapter(this, trackList)
         listViewItems?.adapter = trackAdapter
+
+        // Crear la instancia de la base de datos Room
+        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "search_db")
+            .build()
+
+        // Obtener el DAO para las operaciones de búsqueda
+        searchQueryDao = db.searchQueryDao()
     }
     private fun initViews() {
         txtSearch = findViewById(R.id.txtSearch)
@@ -87,6 +105,7 @@ class MainActivity : AppCompatActivity() {
 
                                     if (trackResponse != null && trackResponse.tracks.items.isNotEmpty()) {
 
+                                        trackList.clear()
                                         var count = 0 // Variable de conteo para limitar la cantidad de canciones a mostrar
 
                                         for (track in trackResponse.tracks.items) {
@@ -101,6 +120,9 @@ class MainActivity : AppCompatActivity() {
                                                 break // Detener el bucle después de 50 canciones
                                             }
                                         }
+                                        // Guardar la búsqueda en la base de datos local
+                                        val searchQuery = SearchQuery(query = query)
+                                        saveSearchQuery(searchQuery)
                                     } else {
                                         displayErrorMessage("No se encontraron canciones.")
                                     }
@@ -132,6 +154,13 @@ class MainActivity : AppCompatActivity() {
         val track = Track(trackName, album, "")
         trackList.add(track)
         trackAdapter.notifyDataSetChanged()
+    }
+
+    private fun saveSearchQuery(searchQuery: SearchQuery) {
+        // Utilizar una corutina para realizar la operación de inserción en segundo plano
+        CoroutineScope(Dispatchers.IO).launch {
+            searchQueryDao.insertSearchQuery(searchQuery)
+        }
     }
 
 
