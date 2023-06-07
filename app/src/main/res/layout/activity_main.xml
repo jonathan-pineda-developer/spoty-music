@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 android:text="@string/spotify"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/celeste"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -61,6 +61,9 @@
                 android:id="@+id/btnSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/rounded_button"
+                app:icon="@drawable/buscar"
                 android:text="@string/search" />
         </LinearLayout>
 

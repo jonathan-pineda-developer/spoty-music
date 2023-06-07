@@ -46,14 +46,14 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/imgAction"
-        android:layout_width="79dp"
-        android:layout_height="60dp"
+        android:layout_width="59dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_weight="0"
         android:contentDescription="@string/imageaction"
-        app:srcCompat="@drawable/menu"
+        app:srcCompat="@drawable/info"
         tools:ignore="ImageContrastCheck" />
 
 </LinearLayout>

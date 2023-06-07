@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">spoty</string>
     <string name="search">Buscar</string>
-    <string name="spotify">Spotify</string>
+    <string name="spotify">Spoty Music</string>
     <string name="image">Img</string>
     <string name="imageaction">ImgAction</string>
     <string name="album">Album</string>
