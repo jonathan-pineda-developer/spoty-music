@@ -4,4 +4,6 @@
     <string name="spotify">Spotify</string>
     <string name="image">Img</string>
     <string name="imageaction">ImgAction</string>
+    <string name="album">Album</string>
+    <string name="artista">Artista</string>
 </resources>

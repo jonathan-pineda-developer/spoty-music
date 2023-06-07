@@ -41,6 +41,19 @@
             android:text="Artista"
             android:textSize="12sp"
             android:textStyle="bold" />
+
+
     </LinearLayout>
+    <ImageView
+        android:id="@+id/imgAction"
+        android:layout_width="79dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="0"
+        android:contentDescription="@string/imageaction"
+        app:srcCompat="@drawable/menu"
+        tools:ignore="ImageContrastCheck" />
 
 </LinearLayout>
