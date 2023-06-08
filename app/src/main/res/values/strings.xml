@@ -6,4 +6,7 @@
     <string name="imageaction">ImgAction</string>
     <string name="album">Album</string>
     <string name="artista">Artista</string>
+    <string name="action_settings">accion</string>
+    <string name="first_fragment_label">first framgemen</string>
+    <string name="second_fragment_label">second fragment</string>
 </resources>
