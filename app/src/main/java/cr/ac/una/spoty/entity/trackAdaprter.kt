@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import cr.ac.una.spoty.entity.Track
 import cr.ac.una.spoty.R
+
 
 class TrackAdapter(context: Context, tracks: List<Track>) : ArrayAdapter<Track>(context, 0, tracks) {
 

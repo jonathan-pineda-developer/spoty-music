@@ -59,10 +59,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initViews()
         //searchTracks("iron maiden")
-        btnSearch.setOnClickListener {
-            val query = txtSearch.text.toString()
-            searchTracks(query)
-        }
+
         trackAdapter = TrackAdapter(this, trackList)
         listViewItems?.adapter = trackAdapter
 
@@ -77,6 +74,10 @@ class MainActivity : AppCompatActivity() {
         txtSearch = findViewById(R.id.txtSearch)
         btnSearch = findViewById(R.id.btnSearch)
         listViewItems = findViewById(R.id.listViewItems)
+        btnSearch.setOnClickListener {
+            val query = txtSearch.text.toString()
+            searchTracks(query)
+        }
     }
 
     private fun searchTracks(query: String) {
@@ -112,8 +113,10 @@ class MainActivity : AppCompatActivity() {
                                             val trackName = track.name
                                             val artistName = track.album.name
                                             val trackUri = track.uri
+                                            val imageUrl = track.album.images.firstOrNull()?.url ?: ""
 
-                                            displayTrackInfo(trackName, artistName, track.album.images[0].url)
+                                            //displayTrackInfo(trackName, artistName, track.album.images[0].url)
+                                            displayTrackInfo(trackName, artistName, imageUrl)
                                             count++ // Incrementar el conteo
 
                                             if (count >= 50) {
