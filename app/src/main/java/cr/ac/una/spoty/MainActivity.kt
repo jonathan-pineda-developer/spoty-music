@@ -21,6 +21,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -124,7 +126,10 @@ class MainActivity : AppCompatActivity() {
                                             }
                                         }
                                         // Guardar la búsqueda en la base de datos local
-                                        val searchQuery = SearchQuery(query = query)
+                                        val dataFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                                        dataFormat.timeZone = TimeZone.getTimeZone("GMT-06:00")
+                                        val date = dataFormat.format(Date())
+                                        val searchQuery = SearchQuery(query = query, date = date)
                                         saveSearchQuery(searchQuery)
                                     } else {
                                         displayErrorMessage("No se encontraron canciones.")
